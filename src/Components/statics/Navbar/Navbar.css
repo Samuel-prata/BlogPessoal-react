@@ -1,0 +1,26 @@
+:root{
+    flex-grow: 1;
+    
+}
+
+.appBar{
+    background: linear-gradient(0deg, rgba(0,0,0,1) 45%, rgba(218,111,20,1) 100%);
+   
+}
+
+.menuButton:hover{
+    color: black;
+    background-color: white;
+    font-weight: bold;
+}
+
+.title{
+    flex-grow: 1;
+    color: white;
+}
+
+.options:hover{
+    color: black;
+    background-color: white;
+    font-weight: bold;
+}
