@@ -1,6 +1,5 @@
 import React from "react";
-import { Grid, Typography, Button } from "@material-ui/core"
-import Box from "@material-ui/core/Box"
+import { Grid, Box, Typography, Button } from "@material-ui/core"
 import './Home.css';
 import { Height } from "@material-ui/icons";
 

@@ -32,7 +32,7 @@ function Footer() {
                         </Box>
                         <Box>
                             <a target="_blank" href="https://www.google.com/intl/pt-BR/gmail/about/#inbox">
-                                <Typography variant="subtitle2" gutterBottom style={{ color: "white", fontWeight:"bold", textDecoration:"none" }} align="center">samueldevfull@gmail.com</Typography>
+                                <Typography variant="subtitle2" gutterBottom style={{ color: "white", fontWeight:"bold", textDecoration:"" }} align="center">samueldevfull@gmail.com</Typography>
                             </a>
                         </Box>
                     </Box>
