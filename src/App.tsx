@@ -9,16 +9,17 @@ import Login from './pages/login/Login'
 //imports necessários
 import { Grid } from '@material-ui/core';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import CadastroUsuario from './pages/cadastroUsuario/CadastroUsuario'
 
 function App() {
    return (
       <>
          <BrowserRouter>
-
             <Navbar />
             <Routes>
                <Route path='/' element={<Login />} />
                <Route path='/login' element={<Login />} />
+               <Route path='/cadastrousuario' element={<CadastroUsuario />} />
                <Route path='/home' element={<Home />} />
             </Routes>
             <Footer />

@@ -1,5 +1,4 @@
-import React, { ChangeEvent, useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,16 +6,14 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Link, useNavigate } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
-import { login } from '../../services/Services';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import UserLogin from '../../models/UserLogin';
-
+import User from '../../models/User';
+import { login } from '../../services/Services';
 
 
 function Copyright() {
@@ -61,44 +58,35 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SignInSide() {
-    let navigate = useNavigate();
-    const [token, setToken] = useLocalStorage('token');
-
-
+export default function CadastroUsuario() {
     const classes = useStyles();
 
-    const [userLogin, setUserLogin] = useState<UserLogin>({
-        id: 0,
-        email: '',
-        password: '',
-        photo: '',
-        token: ''
+    let navigate = useNavigate();
+    const [confirmarSenha, setConfirmarSenha] = useState<String>('')
+    const [user, setUser] = useState<User>({
+            id: 0,
+            name:'',
+            email:'',
+            password:'',
+            photo:''
+
     })
 
-    function updateModel(e: ChangeEvent<HTMLInputElement>) {
-        setUserLogin({
-            ...userLogin,
-            [e.target.name]: e.target.value
-        })
-    }
+    const [userResult, setUserResult] = useState<User>({
+        id:0,
+        name:'',
+        email:'',
+        password:'',
+        photo:''
+    })
+
     useEffect(()=>{
-
-        if(token != ''){
-            navigate('/home')
+        if(userResult != ''){
+            navigate('/login')
+            alert('Usuário cadastrado com sucesso!')
         }
-    }, [token])
 
-    async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
-        e.preventDefault();
-        try {
-            await login ('/usuarios/logar', userLogin, setToken) //rota do backend usando userLogin
-            
-            alert('Usuario Logado com sucesso!')
-        } catch (error) {
-            alert('Dados do usuário incorretos. Erro ao logar')
-        }
-    }
+    }, [userResult])
 
     return (
         <Grid container component="main" className={classes.root}>
@@ -110,18 +98,27 @@ export default function SignInSide() {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Entrar
+                        Sign in
                     </Typography>
-                    <form className={classes.form} onSubmit={onSubmit}>
+                    <form className={classes.form} noValidate>
                         <TextField
                             variant="outlined"
                             margin="normal"
                             required
                             fullWidth
-                            value={userLogin.email}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => updateModel(e)}
+                            id="nome"
+                            label="Nome"
+                            name="nome"
+                            autoComplete="nome"
+                            autoFocus
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
                             id="email"
-                            label="Email Address"
+                            label="Email"
                             name="email"
                             autoComplete="email"
                             autoFocus
@@ -131,49 +128,42 @@ export default function SignInSide() {
                             margin="normal"
                             required
                             fullWidth
-                            value={userLogin.password}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => updateModel(e)}
-                            name="password"
-                            label="Password"
+                            name="senha"
+                            label="Senha"
                             type="password"
                             id="password"
                             autoComplete="current-password"
                         />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Me lembre"
-                        />
-                        <Box>
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                                className={classes.submit}
 
-                            >
-                                Entre
-                            </Button>
+                        <Box display='flex' justifyContent='space-around'>
+                            <Link to="/home">
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.submit}
+                                >
+                                    Cadastrar
+                                </Button>
+                            </Link>
+                            <Link to="/login">
 
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    className={classes.submit}
+                                >
+                                    Cancelar
+                                </Button>
+                            </Link>
                         </Box>
-                        <Grid container>
-                            <Grid item xs>
-                                Esqueceu a senha?
-                            </Grid>
-                            <Grid item>
-                                <Link to="/cadastrousuario">
-                                    {"Não tem uma conta? Cadastre-se"}
-                                </Link>
-                            </Grid>
-                        </Grid>
+
                         <Box mt={5}>
                             <Copyright />
                         </Box>
-
                     </form>
                 </div>
             </Grid>
-        </Grid>
+        </Grid >
     );
 }
-

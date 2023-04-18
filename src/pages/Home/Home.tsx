@@ -3,6 +3,7 @@ import { Grid, Box, Typography, Button } from "@material-ui/core"
 import './Home.css';
 import { Height } from "@material-ui/icons";
 
+
 function Home() {
     return (
         <>
@@ -19,7 +20,7 @@ function Home() {
                     </Box>
                 </Grid>
                 <Grid item xs={6} >
-                    <img src="src\assets\img\imagemcomputadordev.png" alt="" width="500px" height="500px" />
+                    <img src="src\assets\img\Blog post-bro.png" alt="" width="500px" height="500px" />
                 </Grid>
                 <Grid xs={12} style={{ backgroundColor: "white" }}>
                 </Grid>
