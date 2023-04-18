@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,7 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import User from '../../models/User';
-import { login } from '../../services/Services';
+import { cadastroUsuario, login } from '../../services/Services';
 
 
 function Copyright() {
@@ -81,13 +81,26 @@ export default function CadastroUsuario() {
     })
 
     useEffect(()=>{
-        if(userResult != ''){
+        if(userResult.id !== 0){
             navigate('/login')
-            alert('Usuário cadastrado com sucesso!')
         }
 
     }, [userResult])
 
+    function confirmarSenhaHandle(e: ChangeEvent<HTMLInputElement>){
+        setConfirmarSenha(e.target.value)
+    }
+
+    async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
+        e.preventDefault();
+        try {
+            await cadastroUsuario ('/usuarios/cadastrar', userResult, setConfirmarSenha) //rota do backend usando userLogin
+            
+            alert('Usuario Logado com sucesso!')
+        } catch (error) {
+            alert('Dados do usuário incorretos. Erro ao logar')
+        }
+    }
     return (
         <Grid container component="main" className={classes.root}>
             <CssBaseline />
@@ -100,7 +113,7 @@ export default function CadastroUsuario() {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <form className={classes.form} noValidate>
+                    <form className={classes.form} onSubmit={onSubmit}>
                         <TextField
                             variant="outlined"
                             margin="normal"
