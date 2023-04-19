@@ -1,7 +1,10 @@
 import React from "react";
-import { Grid, Box, Typography, Button } from "@material-ui/core"
+import { Grid, Typography, Button } from "@material-ui/core"
+import Box from '@mui/material/Box/Box';
 import './Home.css';
 import { Height } from "@material-ui/icons";
+import { Link } from "react-router-dom";
+import User from '../../models/User';
 
 
 function Home() {
@@ -16,7 +19,7 @@ function Home() {
                     <Box display="flex" justifyContent="center">
                         <Box marginRight={1}>
                         </Box>
-                        <Button variant="outlined" style={{ borderColor: "white", backgroundColor: "#eea832", color: "white", fontWeight: "bold" }}>Ver postagens</Button>
+                     <Link to='/postagens'><Button variant="outlined" style={{ borderColor: "white", backgroundColor: "#eea832", color: "white", fontWeight: "bold" }}>Ver postagens</Button></Link>
                     </Box>
                 </Grid>
                 <Grid item xs={6} >

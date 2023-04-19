@@ -1,17 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import {Grid, Avatar, Button, CssBaseline,Typography, makeStyles, Checkbox, FormControlLabel, TextField, Paper } from '@material-ui/core'
 import { Link, useNavigate } from 'react-router-dom';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
+import Box from '@mui/material/Box/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import User from '../../models/User';
 import { cadastroUsuario, login } from '../../services/Services';
 
@@ -64,41 +55,53 @@ export default function CadastroUsuario() {
     let navigate = useNavigate();
     const [confirmarSenha, setConfirmarSenha] = useState<String>('')
     const [user, setUser] = useState<User>({
-            id: 0,
-            name:'',
-            email:'',
-            password:'',
-            photo:''
+        id: 0,
+        name: '',
+        email: '',
+        password: '',
+        photo: ''
 
     })
 
     const [userResult, setUserResult] = useState<User>({
-        id:0,
-        name:'',
-        email:'',
-        password:'',
-        photo:''
+        id: 0,
+        name: '',
+        email: '',
+        password: '',
+        photo: ''
     })
 
-    useEffect(()=>{
-        if(userResult.id !== 0){
+    useEffect(() => {
+        if (userResult.id !== 0) {
             navigate('/login')
         }
 
     }, [userResult])
 
-    function confirmarSenhaHandle(e: ChangeEvent<HTMLInputElement>){
+    function confirmarSenhaHandle(e: ChangeEvent<HTMLInputElement>) {
         setConfirmarSenha(e.target.value)
     }
 
+    function updateModel(e: ChangeEvent<HTMLInputElement>) {
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value
+        })
+
+    }
+
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
-        e.preventDefault();
-        try {
-            await cadastroUsuario ('/usuarios/cadastrar', userResult, setConfirmarSenha) //rota do backend usando userLogin
-            
-            alert('Usuario Logado com sucesso!')
-        } catch (error) {
-            alert('Dados do usuário incorretos. Erro ao logar')
+        e.preventDefault();//para não atualizar a tela
+        if (confirmarSenha === user.password) {
+            try {
+                await cadastroUsuario('/usuarios/cadastrar', user, setUserResult)
+                alert("Usuario cadastrado com sucesso!")
+            } catch (error) {
+                alert('Dados incorretos, tente novamente')
+            }
+
+        } else {
+            alert("As senhas precisam ser idênticas")
         }
     }
     return (
@@ -111,21 +114,25 @@ export default function CadastroUsuario() {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        Cadastre-se
                     </Typography>
                     <form className={classes.form} onSubmit={onSubmit}>
                         <TextField
+                            value={user.name}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => updateModel(e)}
                             variant="outlined"
                             margin="normal"
                             required
                             fullWidth
                             id="nome"
                             label="Nome"
-                            name="nome"
+                            name="name"
                             autoComplete="nome"
                             autoFocus
                         />
                         <TextField
+                            value={user.email}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => updateModel(e)}
                             variant="outlined"
                             margin="normal"
                             required
@@ -137,30 +144,44 @@ export default function CadastroUsuario() {
                             autoFocus
                         />
                         <TextField
+                            value={user.password}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => updateModel(e)}
                             variant="outlined"
                             margin="normal"
                             required
                             fullWidth
-                            name="senha"
+                            name="password"
                             label="Senha"
                             type="password"
                             id="password"
                             autoComplete="current-password"
                         />
+                        <TextField
+                            value={confirmarSenha}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => confirmarSenhaHandle(e)}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="confirmarSenha"
+                            label="Confirmar senha"
+                            type="password"
+                            id="confirmPassword"
+                            autoComplete="current-password"
+                        />
 
                         <Box display='flex' justifyContent='space-around'>
-                            <Link to="/home">
-                                <Button
-                                    type="submit"
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.submit}
-                                >
-                                    Cadastrar
-                                </Button>
-                            </Link>
-                            <Link to="/login">
 
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                className={classes.submit}
+                            >
+                                Cadastrar
+                            </Button>
+
+                            <Link to="/login">
                                 <Button
                                     variant="contained"
                                     color="secondary"

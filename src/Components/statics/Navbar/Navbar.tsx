@@ -1,10 +1,10 @@
 import React from "react";
-import { Toolbar, AppBar, IconButton, Typography, Button } from "@material-ui/core"
+import { Toolbar, AppBar, IconButton, Typography, Button } from '@material-ui/core';
 import { Link } from "react-router-dom";
 import MenuIcon from '@material-ui/icons/Menu';
 import "./Navbar.css"
 import { Home } from "@material-ui/icons";
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box/Box';
 
 
 function Navbar() {
@@ -17,13 +17,14 @@ function Navbar() {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" className="title">
-                           Home
+                          <Link to='/home' className="homeLink">Home</Link>
                         </Typography>
-                        <Button className="options" style={{ color: "white", fontWeight: "bold" }}>Postagens</Button>
-                        <Button className="options" style={{ color: "white", fontWeight: "bold" }}>Temas</Button>
+                        <Link to ="/postagens"><Button className="options" style={{ color: "white", fontWeight: "bold" }}>Postagens</Button></Link>
+                        <Link to='/temas'><Button className="options" style={{ color: "white", fontWeight: "bold" }}>Temas</Button></Link>
+
                         <Button className="options" style={{ color: "white", fontWeight: "bold" }}>Cadastrar Tema</Button>
                         <Box>
-                            <Link to ="/login"><Button className="options" style={{ color: "white", fontWeight: "bold" }}>Entrar </Button></Link>
+                            <Link to ="/login"><Button className="options" id="changeHome" style={{ color: "white", fontWeight: "bold" }}>Entrar </Button></Link>
                         </Box>
                         
                     </Toolbar>

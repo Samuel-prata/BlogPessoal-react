@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Grid, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
+import Box from '@mui/material/Box/Box';
 import GitHubIcon from "@material-ui/icons/GitHub";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
@@ -8,7 +9,7 @@ import "./Footer.css"
 function Footer() {
     return (
         <>
-            <Grid container direction="row" justifyContent="center" alignItems="center">
+            <Grid container direction="row" justifyContent="flex-end" alignItems="center">
                 <Grid alignItems="center" item xs={12}>
                     <Box className="redesSociais">
                         <Box paddingTop={1} display="flex" alignItems="center" justifyContent="center">
