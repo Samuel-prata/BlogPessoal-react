@@ -24,7 +24,7 @@ function Navbar() {
 
                         <Button className="options" style={{ color: "white", fontWeight: "bold" }}>Cadastrar Tema</Button>
                         <Box>
-                            <Link to ="/login"><Button className="options" id="changeHome" style={{ color: "white", fontWeight: "bold" }}>Entrar </Button></Link>
+                            <Link to ="/login"><Button className="options" id="changeHome" style={{ color: "white", fontWeight: "bold" }}>Logout</Button></Link>
                         </Box>
                         
                     </Toolbar>
