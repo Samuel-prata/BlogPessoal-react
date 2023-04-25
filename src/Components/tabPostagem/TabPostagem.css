@@ -1,0 +1,19 @@
+*{
+    --cor: (0deg, rgba(0,0,0,1) 45%, rgba(218,111,20,1) 100%);
+}
+
+.titulo{
+    font-weight: bold;
+}
+.butPost{
+    background: rgba(218,111,20,1);
+    color: black;
+}
+.fontes{
+    font-weight: bold !important;
+    color: black;
+}
+.sobre{
+    color: white;
+    font-weight: bold;
+}

@@ -3,6 +3,7 @@
 }
 
 .appBar{
+    width: 100%;
     background: linear-gradient(0deg, rgba(0,0,0,1) 45%, rgba(218,111,20,1) 100%);
 }
 
@@ -16,6 +17,10 @@
     flex-grow: 1;
     color: white;
     text-decoration: none;
+}
+.options{
+    color: white !important;
+    font-weight: bold !important;
 }
 
 .options:hover{

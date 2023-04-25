@@ -5,6 +5,7 @@ import './Home.css';
 import { Height } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import User from '../../models/User';
+import TabPostagem from '../../Components/tabPostagem/TabPostagem';
 
 
 function Home() {
@@ -25,8 +26,10 @@ function Home() {
                 <Grid item xs={6} >
                     <img src="src\assets\img\Blog post-bro.png" alt="" width="500px" height="500px" />
                 </Grid>
-                <Grid xs={12} style={{ backgroundColor: "white" }}>
+                <Grid xs={12}>
+                    <TabPostagem />
                 </Grid>
+                
             </Grid>
 
         </>

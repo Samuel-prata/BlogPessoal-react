@@ -27,16 +27,6 @@ function Footer() {
                             </a>
                         </Box>
                     </Box>
-                    <Box style={{ backgroundColor: "black", height: "60px" }}>
-                        <Box paddingTop={1}>
-                            <Typography variant="subtitle2" align="center" gutterBottom style={{ color: "white", fontWeight:"bold" }} >© 2023 Copyright:</Typography>
-                        </Box>
-                        <Box>
-                            <a target="_blank" href="https://www.google.com/intl/pt-BR/gmail/about/#inbox">
-                                <Typography variant="subtitle2" gutterBottom style={{ color: "white", fontWeight:"bold", textDecoration:"" }} align="center">samueldevfull@gmail.com</Typography>
-                            </a>
-                        </Box>
-                    </Box>
                 </Grid>
             </Grid>
         </>

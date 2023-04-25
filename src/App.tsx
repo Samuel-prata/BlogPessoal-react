@@ -12,6 +12,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import CadastroUsuario from './pages/cadastroUsuario/CadastroUsuario'
 import ListaTema from './Components/temas/ListaTemas'
 import ListaPostagens from './Components/postagens/ListaPostagens'
+import CadastroTema from './Components/temas/cadastroTema/CadastroTema'
 
 function App() {
    return (
@@ -25,6 +26,7 @@ function App() {
                <Route path='/home' element={<Home />} />
                <Route path='/temas' element={<ListaTema />} />
                <Route path='/postagens' element={<ListaPostagens />} />
+               <Route path='/formularioTemas/' element={<CadastroTema />} />
             </Routes>
             <Footer />
          </BrowserRouter>
