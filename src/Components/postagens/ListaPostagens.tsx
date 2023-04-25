@@ -7,7 +7,7 @@ import useLocalStorage from 'react-use-localstorage';
 import { busca } from '../../services/Services';
 
 
-function ListaPostagens() {
+function ListaPostagem() {
     const [postagens, setPostagens] = useState<Postagem[]>([])
     const [token, setToken] = useLocalStorage('token')
     let navigate = useNavigate()//redirecionamento de rotas
@@ -70,4 +70,4 @@ function ListaPostagens() {
         </>
     );
 }
-export default ListaPostagens;
+export default ListaPostagem;

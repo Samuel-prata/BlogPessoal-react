@@ -1,5 +1,5 @@
 import axios from "axios";
-import CadastroUsuario from '../pages/cadastroUsuario/CadastroUsuario';
+
 
 export const api = axios.create({
     baseURL: "https://blog-pessoal-0359.onrender.com/"
