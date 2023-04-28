@@ -1,14 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid, Typography, Button } from "@material-ui/core"
 import Box from '@mui/material/Box/Box';
 import './Home.css';
-import { Height } from "@material-ui/icons";
-import { Link } from "react-router-dom";
-import User from '../../models/User';
+import { Link, useNavigate } from "react-router-dom";
 import TabPostagem from '../../Components/tabPostagem/TabPostagem';
+import ModalPostagem from "../../Components/postagens/modalPostageem/ModalPostagem";
+import { useDispatch, useSelector } from "react-redux";
+import { TokenState } from "../../store/tokens/TokensReducer";
+import { addToken } from "../../store/tokens/Actions";
+import { toast } from "react-toastify";
+
+
 
 
 function Home() {
+    let navigate = useNavigate()
+    const token = useSelector<TokenState, TokenState['tokens']>(
+        (state) => state.tokens
+    )
+
+    useEffect(() => {
+        if (token === "") {
+            toast.info('Você precisa estar logado', {
+                position: "top-center",
+                autoClose: 2000,// 2000 milisegundos = 2 segundos
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined
+            })
+            navigate('/login')
+        }
+    }, [token])
+
     return (
         <>
             <Grid container direction="row" justifyContent="center" alignItems="center" style={{ backgroundColor: "black" }} >
@@ -19,8 +45,9 @@ function Home() {
                     </Box>
                     <Box display="flex" justifyContent="center">
                         <Box marginRight={1}>
+                            <ModalPostagem />
                         </Box>
-                     <Link to='/postagens'><Button variant="outlined" style={{ borderColor: "white", backgroundColor: "#eea832", color: "white", fontWeight: "bold" }}>Ver postagens</Button></Link>
+                        <Link to='/postagens'><Button variant="outlined" style={{ borderColor: "white", backgroundColor: "#eea832", color: "white", fontWeight: "bold" }}>Ver postagens</Button></Link>
                     </Box>
                 </Grid>
                 <Grid item xs={6} >
@@ -29,7 +56,7 @@ function Home() {
                 <Grid xs={12}>
                     <TabPostagem />
                 </Grid>
-                
+
             </Grid>
 
         </>

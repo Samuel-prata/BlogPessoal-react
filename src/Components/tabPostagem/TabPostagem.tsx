@@ -9,7 +9,7 @@ import './TabPostagem.css'
 
 function TabPostagem() {
     const [value, setValue] = useState('1')
-   function handleEvent (event:React.ChangeEvent<{}>, newValue: String) {
+   function handleEvent (event:React.ChangeEvent<{}>, newValue: string) {
       setValue(newValue)
     }
 

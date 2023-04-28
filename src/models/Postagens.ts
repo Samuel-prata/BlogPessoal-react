@@ -5,6 +5,6 @@ interface Postagem{
     titulo: String;
     texto: String;
     data: String;
-    Tema?: Tema|null 
+    tema?: Tema|null 
 }
 export default Postagem;

@@ -3,18 +3,31 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
 import { Box } from '@mui/material';
 import Postagem from '../../models/Postagens';
-import useLocalStorage from 'react-use-localstorage';
 import { busca } from '../../services/Services';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../store/tokens/TokensReducer';
+import { toast } from 'react-toastify';
 
 
 function ListaPostagem() {
     const [postagens, setPostagens] = useState<Postagem[]>([])
-    const [token, setToken] = useLocalStorage('token')
+    const token = useSelector<TokenState, TokenState['tokens']>(
+        (state) => state.tokens
+       )
     let navigate = useNavigate()//redirecionamento de rotas
 
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado')
+            toast.info('Você precisa estar logado', {
+                position: "top-center",
+                autoClose: 2000,// 2000 milisegundos = 2 segundos
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined
+            })
             navigate('/login')
         }
     }, [token])
@@ -47,7 +60,7 @@ function ListaPostagem() {
                             <CardActions>
                                 <Box display="flex" justifyContent="center" mb={1.5} >
 
-                                    <Link to={`/formularioPostagens/${postagens.id}`} className="text-decorator-none">
+                                    <Link to={`/formularioPost/${postagens.id}`} className="text-decorator-none">
                                         <Box mx={1}>
                                             <Button variant="contained" className="marginLeft" size='small' color="primary" >
                                                 atualizar

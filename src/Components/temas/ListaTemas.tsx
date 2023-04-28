@@ -3,18 +3,31 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
 import { Box } from '@mui/material';
 import Temas from '../../models/Temas';
-import useLocalStorage from 'react-use-localstorage';
 import { busca } from '../../services/Services';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../store/tokens/TokensReducer';
+import { toast } from 'react-toastify';
 
 
 function ListaTema() {
     const [temas, setTemas] = useState<Temas[]>([])//inicializando um array vazio
-    const [token, setToken] = useLocalStorage('token')//ter acesso ao token armazenado
+    const token = useSelector<TokenState, TokenState['tokens']>(
+        (state) => state.tokens
+    )//ter acesso ao token armazenado
     let navigate = useNavigate();//redirecionamento caso não esteja logado
 
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado')
+            toast.info('Você precisa estar logado', {
+                position: "top-center",
+                autoClose: 2000,// 2000 milisegundos = 2 segundos
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined
+            })
             navigate('/login')
         }
     }, [token])
@@ -55,7 +68,7 @@ function ListaTema() {
                                             </Button>
                                         </Box>
                                     </Link>
-                                    <Link to={`/deletarTema/${tema.id}`} className="text-decorator-none">
+                                    <Link to={`/deletarTemas/${tema.id}`} className="text-decorator-none">
                                         <Box mx={1}>
                                             <Button variant="contained" size='small' color="secondary">
                                                 deletar

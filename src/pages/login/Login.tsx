@@ -2,12 +2,14 @@ import React, { ChangeEvent, useEffect } from 'react';
 import { useState } from 'react';
 import {Grid, Avatar, Button, CssBaseline, TextField, FormControlLabel,Checkbox,Paper, Typography } from '@material-ui/core'
 import { Link, useNavigate } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
 import { login } from '../../services/Services';
 import Box from '@mui/material/Box/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import UserLogin from '../../models/UserLogin';
+import { useDispatch } from 'react-redux';
+import { addToken } from '../../store/tokens/Actions';
+import { toast } from 'react-toastify';
 
 
 
@@ -53,9 +55,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SignInSide() {
+export default function Logar() {
+
     let navigate = useNavigate();
-    const [token, setToken] = useLocalStorage('token');
+    const dispatch = useDispatch()
+    const [token, setToken] = useState('');
 
 
     const classes = useStyles();
@@ -74,9 +78,10 @@ export default function SignInSide() {
             [e.target.name]: e.target.value
         })
     }
-    useEffect(()=>{
 
-        if(token != ''){
+    useEffect(()=>{
+        if(token !== ''){
+            dispatch(addToken(token))
             navigate('/home')
         }
     }, [token])
@@ -84,11 +89,28 @@ export default function SignInSide() {
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
-            await login ('/usuarios/logar', userLogin, setToken) //rota do backend usando userLogin
-            
-            alert('Usuario Logado com sucesso!')
+            await login ('usuarios/logar', userLogin, setToken) //rota do backend usando userLogin
+            toast.success('Usuario logado com sucesso', {
+                position: "top-center",
+                autoClose: 2000,// 2000 milisegundos = 2 segundos
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined
+            })
         } catch (error) {
-            alert('Dados do usuário incorretos. Erro ao logar')
+            toast.error('As informaçãos não estão corretas', {
+                position: "top-center",
+                autoClose: 2000,// 2000 milisegundos = 2 segundos
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined
+            })
         }
     }
 

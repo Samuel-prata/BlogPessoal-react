@@ -5,6 +5,7 @@ import Box from '@mui/material/Box/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import User from '../../models/User';
 import { cadastroUsuario, login } from '../../services/Services';
+import { toast } from 'react-toastify';
 
 
 function Copyright() {
@@ -95,13 +96,40 @@ export default function CadastroUsuario() {
         if (confirmarSenha === user.password) {
             try {
                 await cadastroUsuario('/usuarios/cadastrar', user, setUserResult)
-                alert("Usuario cadastrado com sucesso!")
+                toast.success('Usuario cadastrado com sucesso!', {
+                    position: "top-center",
+                    autoClose: 2000,// 2000 milisegundos = 2 segundos
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    theme: "colored",
+                    progress: undefined
+                })
             } catch (error) {
-                alert('Dados incorretos, tente novamente')
+                toast.error('Informações insuficientes, tente novamente', {
+                    position: "top-center",
+                    autoClose: 2000,// 2000 milisegundos = 2 segundos
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    theme: "colored",
+                    progress: undefined
+                })
             }
 
         } else {
-            alert("As senhas precisam ser idênticas")
+            toast.error('As senhas precisam ser idênticas', {
+                position: "top-center",
+                autoClose: 2000,// 2000 milisegundos = 2 segundos
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined
+            })
         }
     }
     return (
