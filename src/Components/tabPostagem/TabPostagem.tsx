@@ -29,7 +29,7 @@ function TabPostagem() {
                 </TabPanel>
                 <TabPanel value="2">
                     <Typography variant="h5" gutterBottom style={{color:'white'}} component='h5' align="center" className="titulo">Sobre nós</Typography>
-                    <Typography variant="body1" style={{color:'white'}} align="justify"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit accusantium consequatur, reiciendis sed libero recusandae ratione officia laborum provident ex sequi eius quas rem, laudantium laboriosam fugiat mollitia rerum quam?</Typography>
+                    <Typography variant="body1" style={{color:'white'}} align="justify"> Lorem ipsum dolor sit amet consecteturu adipisicing elit. Odit accusantium consequatur, reiciendis sed libero recusandae ratione officia laborum provident ex sequi eius quas rem, laudantium laboriosam fugiat mollitia rerum quam?</Typography>
                 </TabPanel>
             </TabContext>
         </>

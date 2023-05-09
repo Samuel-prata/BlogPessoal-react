@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import Temas from '../../models/Temas';
 import { busca } from '../../services/Services';
 import { useSelector } from 'react-redux';
@@ -46,41 +46,50 @@ function ListaTema() {
 
     return (
         <>
-            {
-                temas.map(tema => (
-                    <Box m={2} >
-                        <Card variant="outlined">
-                            <CardContent>
-                                <Typography color="textSecondary" gutterBottom>
-                                    Tema
-                                </Typography>
-                                <Typography variant="h5" component="h2">
-                                    {tema.descricao}
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Box display="flex" justifyContent="center" mb={1.5} >
+            <Grid container display={'flex'}>
+                {
+                    temas.map(tema => (
+                        <Box m={2}>
+                            <Card variant="outlined">
+                                <CardContent>
+                                    <Typography color="textSecondary" gutterBottom>
+                                        Tema
+                                    </Typography>
+                                    <Typography variant="h5" component="h2">
+                                        {tema.descricao}
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Box display="flex" justifyContent="center" mb={1.5} >
 
-                                    <Link to={`/formularioTemas/${tema.id}`} className="text-decorator-none">
-                                        <Box mx={1}>
-                                            <Button variant="contained" className="marginLeft" size='small' color="primary" >
-                                                atualizar
-                                            </Button>
-                                        </Box>
-                                    </Link>
-                                    <Link to={`/deletarTemas/${tema.id}`} className="text-decorator-none">
-                                        <Box mx={1}>
-                                            <Button variant="contained" size='small' color="secondary">
-                                                deletar
-                                            </Button>
-                                        </Box>
-                                    </Link>
-                                </Box>
-                            </CardActions>
-                        </Card>
-                    </Box>
-                ))
-            }
+                                        <Link to={`/formularioTemas/${tema.id}`} className="text-decorator-none">
+                                            <Box mx={1}>
+                                                <Button variant="contained" className="marginLeft" size='small' color="primary" >
+                                                    atualizar
+                                                </Button>
+                                            </Box>
+                                        </Link>
+                                        <Link to={`/deletarTemas/${tema.id}`} className="text-decorator-none">
+                                            <Box mx={1}>
+                                                <Button variant="contained" size='small' style={{background:'red', fontWeight:'bold', color:'white'}}>
+                                                    deletar
+                                                </Button>
+                                            </Box>
+                                        </Link>
+                                    </Box>
+                                </CardActions>
+                            </Card>
+                        </Box>
+
+                    ))
+                }
+
+            </Grid>
+            <Grid container>
+                <Link to='/formularioTemas'>
+                <Button variant='contained' color='secondary'>Adicionar Tema</Button>
+                </Link>
+            </Grid>
 
         </>
     );

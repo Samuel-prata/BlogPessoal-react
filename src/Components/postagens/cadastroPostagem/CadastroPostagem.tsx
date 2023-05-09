@@ -9,6 +9,7 @@ import Tema from '../../../models/Temas';
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/TokensReducer';
 import { toast } from 'react-toastify';
+import User from '../../../models/User';
 
 export default function CadastroPostagem() {
     let navigate = useNavigate();
@@ -40,6 +41,15 @@ export default function CadastroPostagem() {
             descricao: ''
         }
     )
+    const [userId, setUserId] = useState<User>(
+        {
+            id: 0,
+            email: '',
+            name: '',
+            password: '',
+            photo: ''
+        }
+    )
 
     const [post, setPost] = useState<Postagem>(
         {
@@ -47,9 +57,11 @@ export default function CadastroPostagem() {
             titulo: '',
             texto: '',
             data: '',
-            tema: null
+            tema: tema,
+            usuario: userId
         }
     )
+
     useEffect(() => {
         setPost({
             ...post,
@@ -58,11 +70,20 @@ export default function CadastroPostagem() {
     }, [tema])
 
     useEffect(() => {
+        setPost({
+            ...post,
+            usuario: userId
+        })
+    }, [userId])
+
+
+    useEffect(() => {
         if (id != undefined) {
             findByIdPost(id);
         }
     }, [id])
 
+    
     async function getTemas() {
         await busca("/temas", setTemas, {
             headers: {
@@ -83,7 +104,8 @@ export default function CadastroPostagem() {
         setPost({
             ...post,
             [e.target.name]: e.target.value,
-            tema: tema
+            tema: tema,
+            usuario: userId
         })
     }
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
@@ -135,6 +157,7 @@ export default function CadastroPostagem() {
 
         <Container maxWidth='sm' className='topo'>
             <form onSubmit={onSubmit}>
+                
                 <Typography variant='h3' color='textSecondary' component='h1' align='center'>Formulário cadastro de postagens</Typography>
                 <TextField value={post.titulo}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => updatedPost(e)} id="titulo"

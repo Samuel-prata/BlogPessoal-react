@@ -1,7 +1,7 @@
 import { Container, Typography, TextField } from '@material-ui/core';
-import { Button } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Tema from '../../../models/Temas';
 import { atualizar, buscaId, postar } from '../../../services/Services';
 import './CadastroTema.css'
@@ -114,7 +114,15 @@ export default function CadastroTema() {
                 <TextField value={tema.descricao}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => updatedTema(e)} id="descricao"
                     label="descricao" variant="outlined" name="descricao" margin="normal" fullWidth />
-                <Button type='submit' variant='contained' color='primary' >Finalizar</Button>
+                <Grid container>
+                    <Button type='submit' variant='contained' color='primary' >Finalizar</Button>
+                    <Link to='/temas'>
+                        <Button type='submit' variant='contained' color='error'>
+                            Cancelar
+                        </Button>
+                    </Link>
+                </Grid>
+
             </form>
         </Container>
     );
